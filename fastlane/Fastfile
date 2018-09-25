@@ -1,0 +1,57 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+import "fabric"
+
+fastlane_version "2.101.1"
+default_platform(:ios)
+
+platform :ios do
+
+  before_all do
+    cocoapods
+  end
+  
+  # used app
+  lane :app do |values|
+    inc_build_number(values)
+  end
+
+  # used to send slack message
+  lane :tmp_slack do
+    notify_slack()
+  end
+
+  # used to upload builds to fabric
+  lane :beta do |values|
+    private_fabric(values)
+  end
+
+  # used to upload builds to testflight
+  lane :test do |values|
+    private_testflight(values)
+  end
+
+  # used to upload builds to app store
+  lane :store do |values|
+    private_appstore(values)
+  end
+
+  # used to run unit tests
+  lane :tests do |values|
+    unit_tests
+  end
+
+end

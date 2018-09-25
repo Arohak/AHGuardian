@@ -94,9 +94,9 @@ extension TestTableViewCellContentView {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm:ss"
         let time = dateFormatter.string(from: Date())
-        timeLabel.attributedText = NSAttributedString(string: time)
 
-        setAttributedText(with: item.title)
+        setAttributedText(for: timeLabel, with: time)
+        setAttributedText(for: textLabel, with: item.title, fontSize: 12, color: .white)
         thumbImageView.download(image: item.image)
 
         setTopInset(with: item.title, and: time)
@@ -106,25 +106,30 @@ extension TestTableViewCellContentView {
 extension TestTableViewCellContentView {
 
     fileprivate func setTopInset(with title: String, and time: String) {
-        let widht = Screen.width * 0.7
+        let width = Screen.width * 0.7 - max_inset
         let timeWidth = time.widthOfString(usingFont: .systemFont(ofSize: 10))
-        guard let last = title.split(separator: " ").last,
-            let rect = getBoundingRect(for: textLabel, with: String(last)) else {
+        guard title.count > 4 else {
+            topInset?.constant = -max_inset
             return
         }
-        let result = rect.origin.x + rect.size.width + max_inset
-        let freeSpace = widht - result
-        topInset?.constant = freeSpace < timeWidth || freeSpace < 0 ? max_inset/4 : -max_inset
-        print("result = \(result), timeWidth = \(timeWidth), freeSpace = \(freeSpace)\n")
+        let suffix = String(title.suffix(4))
+        guard let rect = getBoundingRect(for: textLabel, with: suffix) else { return }
+        let freeSpace = width - rect.maxX
+        topInset?.constant = freeSpace < timeWidth ? max_inset/4 : -max_inset
+
+//        print("maxX = \(rect.maxX), title = \(title)\n")
     }
 
-    fileprivate func setAttributedText(with string: String) {
+    fileprivate func setAttributedText(for label: UILabel,
+                                       with string: String,
+                                       fontSize: CGFloat = 10,
+                                       color: UIColor = UIColor.gray) {
         let attributes : [NSAttributedStringKey : Any] = [
-            NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue) : UIFont.systemFont(ofSize: 12.0),
-            NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue) : UIColor.white
+            NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue) : color,
+            NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue) : UIFont.systemFont(ofSize: fontSize)
         ]
         let attributedText = NSAttributedString(string: string, attributes: attributes)
-        textLabel.attributedText = attributedText
+        label.attributedText = attributedText
     }
 
     fileprivate func getBoundingRect(for label: UILabel, with string: String) -> CGRect? {
@@ -132,11 +137,9 @@ extension TestTableViewCellContentView {
             return nil
         }
         let rect = label.boundingRect(for: NSRange(stringRange, in: text))
-//        if sublayer.superlayer != label.layer {
-//            sublayer.borderWidth = 1
-//            sublayer.frame = rect!
-//            label.layer.addSublayer(sublayer)
-//        }
+//        sublayer.borderWidth = 1
+//        sublayer.frame = rect!
+//        label.layer.addSublayer(sublayer)
         return rect
     }
 }
@@ -162,12 +165,12 @@ extension UILabel {
         let textStorage = NSTextStorage(attributedString: attributedText)
         let layoutManager = NSLayoutManager()
         textStorage.addLayoutManager(layoutManager)
-        let textContainer = NSTextContainer(size: bounds.size)
+        let textContainer = NSTextContainer(size: CGSize(width: bounds.size.width, height: .greatestFiniteMagnitude))
         textContainer.lineFragmentPadding = 0.0
         layoutManager.addTextContainer(textContainer)
         var glyphRange = NSRange()
         layoutManager.characterRange(forGlyphRange: range, actualGlyphRange: &glyphRange)
-
-        return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        let rect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        return rect
     }
 }

@@ -1,0 +1,117 @@
+
+app_name                = "AHGuardian"
+app_path                = "./build"
+ipa_name                = "#{app_name}.ipa"
+plist_path              = "./#{app_name}/Supporting Files/Info.plist"
+bundle_short_version    = "CFBundleShortVersionString"
+bundle_version          = "CFBundleVersion"
+
+private_lane :private_fabric do |values|
+    api_token       = "d1f7fd930377c1ba3e8e9162c0b0c9c023f742bb"
+    build_secret    = "86eebe4aafdb4b681e00c4a1379ec7a2bec4eedc30133ba1f5cfce820db291be"
+
+    # delete output file
+    sh "rm -rf #{app_path}"
+
+    inc_build_number(values)
+
+    gym(
+        workspace:          "#{app_name}.xcworkspace", 
+        scheme:             app_name,
+        export_method:      "ad-hoc",
+        configuration:      "Ad Hoc",
+        output_name:        ipa_name,
+        output_directory:   app_path,
+        build_path:         app_path,
+        buildlog_path:      app_path,
+        silent:             true,
+        clean:              true
+    )
+
+    crashlytics(
+        api_token:      api_token,
+        build_secret:   build_secret,
+    )   
+    
+    upload_symbols_to_crashlytics(
+        dsym_path: "./#{app_path}/#{app_name}.app.dSYM.zip",
+        api_token: api_token
+    )
+
+    notify_slack(message: "The build has been uploaded to the Fabric! See it at https://fabric.io/_/beta")
+end
+
+private_lane :private_testflight do |values|
+
+    # version bump
+    inc_build_number(values)
+
+    # build app
+    gym(
+        workspace:          "#{app_name}.xcworkspace", 
+        scheme:             app_name,
+        output_name:        ipa_name,
+        output_directory:   app_path,
+        build_path:         app_path,
+        buildlog_path:      app_path,
+        silent:             true,
+        clean:              true
+    )
+
+    # upload to testflight
+    upload_to_testflight(
+        username: values[:username],
+        skip_submission: true,
+        skip_waiting_for_build_processing: true
+    )
+
+    # notify slack
+    notify_slack(message: "The build has been uploaded to the Testflight!")
+end
+
+private_lane :private_appstore do |values|
+
+    inc_build_number(values)
+
+    gym(
+        workspace:  "#{app_name}.xcworkspace", 
+        scheme:     app_name
+    )
+
+    appstore(
+        username:           values[:username],
+        skip_screenshots:   true,
+        skip_metadata:      true,
+        force:              true,
+    )
+
+    notify_slack(message: "The build has been uploaded to the AppStore!")
+end
+
+private_lane :notify_slack do |values|
+    slack_url   = "https://hooks.slack.com/services/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"
+    message     = values[:message] || ""
+    version     = get_info_plist_value(path: plist_path, key: bundle_short_version)
+    build       = get_info_plist_value(path: plist_path, key: bundle_version)
+    fullVersion = "#{version}(#{build})"
+    slack(
+        slack_url:          slack_url,
+        message:            message,
+        payload:            { Version: fullVersion },
+        default_payloads:   [:git_branch],
+    )
+end
+
+private_lane :inc_build_number do |values|
+    version = get_info_plist_value(path: plist_path, key: bundle_short_version)
+    build = get_info_plist_value(path: plist_path, key: bundle_version)
+    new_build = values[:build] || (build.to_i + 1).to_s
+    new_version = values[:version] || version
+
+    puts "current: #{version}(#{build}), new: #{new_version}(#{new_build})"
+
+    set_info_plist_value(path: plist_path, key: bundle_short_version, value: new_version)
+    set_info_plist_value(path: plist_path, key: bundle_version, value: new_build)
+end
+
+

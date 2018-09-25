@@ -1,0 +1,18 @@
+# app_identifier("com.interactive.zangi") # The bundle identifier of your app
+# apple_id("info@secretphone.io") # Your Apple email address
+
+# itc_team_id("117995135") # App Store Connect Team ID
+# team_id("48HRNY665T") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
+
+
+# fastlane add_plugin versioning
+
+# export LC_ALL=en_US.UTF-8
+# export LANG=en_US.UTF-8
+# fastlane beta 
+# fastlane beta version:4.4.1 build:1
+# fastlane test username:arayik.hak@gmail.com  
+# fastlane app_store username:arayik.hak@gmail.com version:4.4.1 build:10 
