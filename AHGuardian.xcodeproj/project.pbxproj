@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		03407AAB61480F7BE992D842 /* Pods_AHGuardian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6654CDAFF9A7C5F7B94DD7 /* Pods_AHGuardian.framework */; };
+		523EA0262159708E0085F08A /* TestTableViewCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EA0242159708E0085F08A /* TestTableViewCellContentView.swift */; };
+		523EA0272159708E0085F08A /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EA0252159708E0085F08A /* TestTableViewCell.swift */; };
+		523EA029215971E70085F08A /* TestLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EA028215971E70085F08A /* TestLandingViewController.swift */; };
+		523EA02B215971FB0085F08A /* TestLandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EA02A215971FB0085F08A /* TestLandingView.swift */; };
+		523EA02D215977BB0085F08A /* TestTableDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EA02C215977BB0085F08A /* TestTableDataProvider.swift */; };
 		52F894271FF2E22F00D33625 /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F893F51FF2E22F00D33625 /* LandingViewModel.swift */; };
 		52F894281FF2E22F00D33625 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F893F61FF2E22F00D33625 /* FeedViewModel.swift */; };
 		52F894291FF2E22F00D33625 /* Landing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F893F81FF2E22F00D33625 /* Landing.swift */; };
@@ -65,6 +70,11 @@
 		2736BC520278A6AB5E0B35DB /* Pods-AHGuardian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AHGuardian.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AHGuardian/Pods-AHGuardian.debug.xcconfig"; sourceTree = "<group>"; };
 		3AC58DAA61DB7454362DC374 /* Pods-AHGuardian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AHGuardian.release.xcconfig"; path = "Pods/Target Support Files/Pods-AHGuardian/Pods-AHGuardian.release.xcconfig"; sourceTree = "<group>"; };
 		522F77891FDFE66E00BD8D04 /* AHGuardian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AHGuardian.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		523EA0242159708E0085F08A /* TestTableViewCellContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewCellContentView.swift; sourceTree = "<group>"; };
+		523EA0252159708E0085F08A /* TestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
+		523EA028215971E70085F08A /* TestLandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLandingViewController.swift; sourceTree = "<group>"; };
+		523EA02A215971FB0085F08A /* TestLandingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLandingView.swift; sourceTree = "<group>"; };
+		523EA02C215977BB0085F08A /* TestTableDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableDataProvider.swift; sourceTree = "<group>"; };
 		52F893F51FF2E22F00D33625 /* LandingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
 		52F893F61FF2E22F00D33625 /* FeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		52F893F81FF2E22F00D33625 /* Landing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landing.swift; sourceTree = "<group>"; };
@@ -137,6 +147,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		523EA0232159708E0085F08A /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				523EA02A215971FB0085F08A /* TestLandingView.swift */,
+				523EA0252159708E0085F08A /* TestTableViewCell.swift */,
+				523EA0242159708E0085F08A /* TestTableViewCellContentView.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		52F893F21FF2E22F00D33625 /* AHGuardian */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +208,7 @@
 				52F893FF1FF2E22F00D33625 /* GEFeedTableDataProvider.swift */,
 				52F894001FF2E22F00D33625 /* FeedTableDataProvider.swift */,
 				52F893FB1FF2E22F00D33625 /* ImageLoadOperation.swift */,
+				523EA02C215977BB0085F08A /* TestTableDataProvider.swift */,
 			);
 			path = DataProvider;
 			sourceTree = "<group>";
@@ -255,6 +276,7 @@
 				52F894151FF2E22F00D33625 /* ChooserViewController.swift */,
 				52F894161FF2E22F00D33625 /* ASLandingViewController.swift */,
 				52F894141FF2E22F00D33625 /* LandingViewController.swift */,
+				523EA028215971E70085F08A /* TestLandingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -262,16 +284,17 @@
 		52F894171FF2E22F00D33625 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				52F894181FF2E22F00D33625 /* FeedCollectionViewCell.swift */,
-				52F894191FF2E22F00D33625 /* FeedTableViewCellContentView.swift */,
-				52F8941A1FF2E22F00D33625 /* LandingView.swift */,
-				52F8941B1FF2E22F00D33625 /* ASTagView.swift */,
+				523EA0232159708E0085F08A /* Test */,
 				52F8941C1FF2E22F00D33625 /* ViewConfiguration.swift */,
-				52F8941D1FF2E22F00D33625 /* TagView.swift */,
+				52F8941A1FF2E22F00D33625 /* LandingView.swift */,
 				52F8941E1FF2E22F00D33625 /* ASLandingView.swift */,
+				52F894181FF2E22F00D33625 /* FeedCollectionViewCell.swift */,
+				52F894211FF2E22F00D33625 /* FeedCollectionViewCellContentView.swift */,
+				52F8941D1FF2E22F00D33625 /* TagView.swift */,
+				52F8941B1FF2E22F00D33625 /* ASTagView.swift */,
 				52F8941F1FF2E22F00D33625 /* ASFeedTableCell.swift */,
 				52F894201FF2E22F00D33625 /* FeedTableViewCell.swift */,
-				52F894211FF2E22F00D33625 /* FeedCollectionViewCellContentView.swift */,
+				52F894191FF2E22F00D33625 /* FeedTableViewCellContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -466,11 +489,13 @@
 				52F894481FF2E22F00D33625 /* FeedTableViewCell.swift in Sources */,
 				52F894451FF2E22F00D33625 /* TagView.swift in Sources */,
 				52F894441FF2E22F00D33625 /* ViewConfiguration.swift in Sources */,
+				523EA0262159708E0085F08A /* TestTableViewCellContentView.swift in Sources */,
 				52F8942D1FF2E22F00D33625 /* FeedCollectionDataProvider.swift in Sources */,
 				52F8943F1FF2E22F00D33625 /* ASLandingViewController.swift in Sources */,
 				52F894291FF2E22F00D33625 /* Landing.swift in Sources */,
 				52F8943D1FF2E22F00D33625 /* LandingViewController.swift in Sources */,
 				52F894491FF2E22F00D33625 /* FeedCollectionViewCellContentView.swift in Sources */,
+				523EA0272159708E0085F08A /* TestTableViewCell.swift in Sources */,
 				52F8943A1FF2E22F00D33625 /* ConfigHelper.swift in Sources */,
 				52F894321FF2E22F00D33625 /* UISettings.swift in Sources */,
 				52F894411FF2E22F00D33625 /* FeedTableViewCellContentView.swift in Sources */,
@@ -482,14 +507,17 @@
 				52F894281FF2E22F00D33625 /* FeedViewModel.swift in Sources */,
 				52F894421FF2E22F00D33625 /* LandingView.swift in Sources */,
 				52F8943B1FF2E22F00D33625 /* DBHelper.swift in Sources */,
+				523EA02B215971FB0085F08A /* TestLandingView.swift in Sources */,
 				52F894361FF2E22F00D33625 /* UIImageView.swift in Sources */,
 				52F894301FF2E22F00D33625 /* FeedTableDataProvider.swift in Sources */,
+				523EA02D215977BB0085F08A /* TestTableDataProvider.swift in Sources */,
 				52F8942F1FF2E22F00D33625 /* GEFeedTableDataProvider.swift in Sources */,
 				52F894431FF2E22F00D33625 /* ASTagView.swift in Sources */,
 				52F8942C1FF2E22F00D33625 /* ASFeedTableDataProvider.swift in Sources */,
 				52F894471FF2E22F00D33625 /* ASFeedTableCell.swift in Sources */,
 				52F894271FF2E22F00D33625 /* LandingViewModel.swift in Sources */,
 				52F894461FF2E22F00D33625 /* ASLandingView.swift in Sources */,
+				523EA029215971E70085F08A /* TestLandingViewController.swift in Sources */,
 				52F894371FF2E22F00D33625 /* Bundle.swift in Sources */,
 				52F894391FF2E22F00D33625 /* UIHelper.swift in Sources */,
 				52F894351FF2E22F00D33625 /* String.swift in Sources */,

@@ -27,7 +27,7 @@ extension AppDelegate {
     fileprivate func startApplication() {
         
         // start inspector
-        TWWatchdogInspector.start()
+//        TWWatchdogInspector.start()
 
         // update realm schema version
         DBHelper.updateRealmSchemaVersion()
